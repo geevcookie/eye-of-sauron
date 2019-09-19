@@ -24,6 +24,10 @@ TIMEOUT       = 15
 start: ; $(info $(M) Starting app...) @ ## Start the app
 	$Q $(GO) run $(START_COMMAND)
 
+# Build
+build: ; $(info $(M) Building image eye-of-sauron...) @ ## Build the docker image
+	$Q docker build -t eye-of-sauron .
+
 # Tools
 
 $(BIN):
