@@ -1,0 +1,144 @@
+definitions:
+  collector.CPUMetrics:
+    properties:
+      idle:
+        type: number
+      perc:
+        type: number
+      system:
+        type: number
+      user:
+        type: number
+    type: object
+  collector.DiskMetrics:
+    properties:
+      free:
+        type: string
+      mount:
+        type: string
+      perc:
+        type: number
+      used:
+        type: string
+    type: object
+  collector.LoadMetrics:
+    properties:
+      load_1:
+        type: number
+      load_5:
+        type: number
+      load_15:
+        type: number
+    type: object
+  collector.MemoryMetrics:
+    properties:
+      free:
+        type: string
+      perc:
+        type: number
+      total:
+        type: string
+      used:
+        type: string
+    type: object
+  collector.Metrics:
+    properties:
+      cpu:
+        $ref: '#/definitions/collector.CPUMetrics'
+        type: object
+      disks:
+        items:
+          $ref: '#/definitions/collector.DiskMetrics'
+        type: array
+      load:
+        $ref: '#/definitions/collector.LoadMetrics'
+        type: object
+      memory:
+        $ref: '#/definitions/collector.MemoryMetrics'
+        type: object
+    type: object
+info:
+  contact: {}
+  license: {}
+  title: Eye of Sauron API
+  version: "1.0"
+paths:
+  /api/metrics:
+    get:
+      consumes:
+      - application/json
+      description: Returns a JSON object containing all metrics for CPU, Memory, and
+        Disk
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: JSON object containing all the metrics
+          schema:
+            $ref: '#/definitions/collector.Metrics'
+      summary: Get all metrics
+      tags:
+      - metrics
+  /api/metrics/cpu:
+    get:
+      consumes:
+      - application/json
+      description: Returns a JSON object containing all CPU metrics
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: JSON object containing CPU metrics
+          schema:
+            $ref: '#/definitions/collector.CPUMetrics'
+      summary: Get CPU metrics
+      tags:
+      - metrics
+  /api/metrics/disks:
+    get:
+      consumes:
+      - application/json
+      description: Returns a JSON object containing all disk metrics
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: JSON array containing disk metrics
+          schema:
+            items:
+              $ref: '#/definitions/collector.DiskMetrics'
+            type: array
+      summary: Get disk metrics
+      tags:
+      - metrics
+  /api/metrics/load:
+    get:
+      consumes:
+      - application/json
+      description: Returns a JSON object containing all load metrics
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: JSON object containing load metrics
+          schema:
+            $ref: '#/definitions/collector.LoadMetrics'
+      summary: Get load metrics
+      tags:
+      - metrics
+  /api/metrics/memory:
+    get:
+      consumes:
+      - application/json
+      description: Returns a JSON object containing all memory metrics
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: JSON object containing memory metrics
+          schema:
+            $ref: '#/definitions/collector.MemoryMetrics'
+      summary: Get CPU metrics
+      tags:
+      - metrics
+swagger: "2.0"

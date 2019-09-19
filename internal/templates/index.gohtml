@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>It's always watching...</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.8/c3.min.css"
+          integrity="sha256-loJlaQZlNV5TexzLFHJ6fGO6PCjUQk4isWOG/7YffC4=" crossorigin="anonymous"/>
+    <style type="text/css">
+        .dark-bg {
+            background: #17181F;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron p-4 p-md-5 text-white rounded dark-bg">
+        <div class="row">
+            <div class="col-md-4 my-auto">
+                <img src="https://cdn.dribbble.com/users/51726/screenshots/2608641/sauron-dribbble.png" width="100%"/>
+            </div>
+            <div class="col-md-6 my-auto">
+                <h1 class="display-4 font-italic">Eye of Sauron</h1>
+                <p class="lead my-3">
+                    It's always watching...
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <h2>CPU</h2>
+            <hr />
+            <div id="cpu"></div>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2>Memory</h2>
+            <hr />
+            <div id="memory"></div>
+        </div>
+        <div class="col-md-4 text-center">
+            <h2>Load</h2>
+            <hr />
+            <div id="load"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3>Disks</h3>
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Mount</th>
+                    <th>Used</th>
+                    <th>Available</th>
+                    <th>Percentage Used</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="table-content"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.min.js"
+        integrity="sha256-+9Mf3cAVmxxudDsr1XwXUeRZFtvdWVYdq5/vcgiYyNU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.8/c3.min.js"
+        integrity="sha256-N10MWEM8r2dC0bw4GafCShV+f23skko9fL5mIGcGd4A=" crossorigin="anonymous"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

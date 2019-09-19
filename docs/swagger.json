@@ -1,0 +1,219 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Eye of Sauron API",
+        "contact": {},
+        "license": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/metrics": {
+            "get": {
+                "description": "Returns a JSON object containing all metrics for CPU, Memory, and Disk",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "metrics"
+                ],
+                "summary": "Get all metrics",
+                "responses": {
+                    "200": {
+                        "description": "JSON object containing all the metrics",
+                        "schema": {
+                            "$ref": "#/definitions/collector.Metrics"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/metrics/cpu": {
+            "get": {
+                "description": "Returns a JSON object containing all CPU metrics",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "metrics"
+                ],
+                "summary": "Get CPU metrics",
+                "responses": {
+                    "200": {
+                        "description": "JSON object containing CPU metrics",
+                        "schema": {
+                            "$ref": "#/definitions/collector.CPUMetrics"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/metrics/disks": {
+            "get": {
+                "description": "Returns a JSON object containing all disk metrics",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "metrics"
+                ],
+                "summary": "Get disk metrics",
+                "responses": {
+                    "200": {
+                        "description": "JSON array containing disk metrics",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/collector.DiskMetrics"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/metrics/load": {
+            "get": {
+                "description": "Returns a JSON object containing all load metrics",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "metrics"
+                ],
+                "summary": "Get load metrics",
+                "responses": {
+                    "200": {
+                        "description": "JSON object containing load metrics",
+                        "schema": {
+                            "$ref": "#/definitions/collector.LoadMetrics"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/metrics/memory": {
+            "get": {
+                "description": "Returns a JSON object containing all memory metrics",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "metrics"
+                ],
+                "summary": "Get CPU metrics",
+                "responses": {
+                    "200": {
+                        "description": "JSON object containing memory metrics",
+                        "schema": {
+                            "$ref": "#/definitions/collector.MemoryMetrics"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "collector.CPUMetrics": {
+            "type": "object",
+            "properties": {
+                "idle": {
+                    "type": "number"
+                },
+                "perc": {
+                    "type": "number"
+                },
+                "system": {
+                    "type": "number"
+                },
+                "user": {
+                    "type": "number"
+                }
+            }
+        },
+        "collector.DiskMetrics": {
+            "type": "object",
+            "properties": {
+                "free": {
+                    "type": "string"
+                },
+                "mount": {
+                    "type": "string"
+                },
+                "perc": {
+                    "type": "number"
+                },
+                "used": {
+                    "type": "string"
+                }
+            }
+        },
+        "collector.LoadMetrics": {
+            "type": "object",
+            "properties": {
+                "load_1": {
+                    "type": "number"
+                },
+                "load_15": {
+                    "type": "number"
+                },
+                "load_5": {
+                    "type": "number"
+                }
+            }
+        },
+        "collector.MemoryMetrics": {
+            "type": "object",
+            "properties": {
+                "free": {
+                    "type": "string"
+                },
+                "perc": {
+                    "type": "number"
+                },
+                "total": {
+                    "type": "string"
+                },
+                "used": {
+                    "type": "string"
+                }
+            }
+        },
+        "collector.Metrics": {
+            "type": "object",
+            "properties": {
+                "cpu": {
+                    "type": "object",
+                    "$ref": "#/definitions/collector.CPUMetrics"
+                },
+                "disks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/collector.DiskMetrics"
+                    }
+                },
+                "load": {
+                    "type": "object",
+                    "$ref": "#/definitions/collector.LoadMetrics"
+                },
+                "memory": {
+                    "type": "object",
+                    "$ref": "#/definitions/collector.MemoryMetrics"
+                }
+            }
+        }
+    }
+}
