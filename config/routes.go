@@ -31,7 +31,6 @@ type Route struct {
 func Routes() []Route {
 	// Define routes here
 	return []Route{
-		{GET, "/ping", handlers.Ping},
 		{GET, "/", handlers.Index},
 		{GET, "/api/metrics", handlers.GetMetrics},
 		{GET, "/api/metrics/cpu", handlers.GetCPU},

@@ -79,8 +79,13 @@ func (c *Collector) Start(channel *chan Metrics) {
 		case <-tick:
 			c.Stats.Update()
 
-			log.WithField("metrics", c.Stats.Metrics()).Info("Collected Metrics:")
-			*channel <- c.Stats.Metrics()
+			// Non blocking channel send
+			select {
+			case *channel <- c.Stats.Metrics():
+				log.WithField("metrics", c.Stats.Metrics()).Info("Collected Metrics:")
+			default:
+				log.WithField("metrics", c.Stats.Metrics()).Info("Collected Metrics:")
+			}
 		}
 	}
 }
@@ -99,20 +104,16 @@ func (s *Stats) Metrics() Metrics {
 	// Disk Metrics
 	m.Disks = []DiskMetrics{}
 	for mount, metrics := range s.Disk.Usages {
-		var p float64
-
-		// Calculate percentage used
+		// Skip virtual mounts
 		if metrics.Total == 0 {
-			p = 0.0
-		} else {
-			p = (float64(metrics.Total-metrics.Free) / float64(metrics.Total)) * 100
+			continue
 		}
 
 		d := DiskMetrics{
 			Mount: mount,
 			Used:  fmt.Sprintf("%0.2fGB", float64(metrics.Total-metrics.Free)/1024/1024/1024),
 			Free:  fmt.Sprintf("%0.2fGB", float64(metrics.Free)/1024/1024/1024),
-			Perc:  toFixed(p, 2),
+			Perc:  toFixed((float64(metrics.Total-metrics.Free) / float64(metrics.Total)) * 100, 2),
 		}
 		m.Disks = append(m.Disks, d)
 	}
